@@ -1,8 +1,10 @@
+const Scrapper = require('../controller/Scrapper');
+
 module.exports = (app)=>{
 
-    app.get('/',(req,res)=>{
-        var obj = {};
-        obj["message"] = "Hello World";
-        res.json(obj);
+    app.get('/',async(req,res)=>{
+        var data = await Scrapper.init();
+        var result = Scrapper.prepareData(data).movies;
+        res.json(result);
     });
 }
